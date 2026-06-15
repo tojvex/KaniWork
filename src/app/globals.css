@@ -222,9 +222,15 @@ a {
 }
 
 .floor-zone {
+  transform-box: fill-box;
+  transform-origin: center;
   transition:
     opacity 180ms ease,
     transform 220ms ease;
+}
+
+.floor-zone.is-active {
+  transform: scale(1.045, 1.08);
 }
 
 .floor-zone.is-faded {
