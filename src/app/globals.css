@@ -313,6 +313,7 @@ a {
 .default-panel,
 .brand-panel {
   position: relative;
+  z-index: 2;
   width: 100%;
   min-height: 100%;
 }
@@ -532,10 +533,25 @@ a {
 
 .experience-shell[data-active-floor="1f-reception"] .panel-stage {
   z-index: 2;
+  --floor-bridge-top: 75%;
+  --floor-bridge-height: 11%;
+  --floor-bridge-color: #e7d1c1;
   top: 0;
   right: 3%;
   bottom: 5%;
   left: 25%;
+}
+
+.experience-shell[data-active-floor="1f-reception"] .panel-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: var(--floor-bridge-top);
+  left: 0;
+  width: 7.2%;
+  height: var(--floor-bridge-height);
+  background: var(--floor-bridge-color);
+  pointer-events: none;
 }
 
 .reception-panel {
@@ -553,10 +569,6 @@ a {
     13% 100%,
     13% 94%,
     7% 94%,
-    7% 88%,
-    0 88%,
-    0 74%,
-    7% 74%,
     7% 12%,
     7% 12%
   );
@@ -986,29 +998,53 @@ a {
   left: clamp(203px, 26vw, 360px);
 }
 
-.experience-shell[data-active-floor="5f-clinic"] {
-  --service-bridge-top: 20%;
-  --service-bridge-bottom: 33%;
+.experience-shell:is(
+    [data-active-floor="2f-aesthetic"],
+    [data-active-floor="2f-clinic"],
+    [data-active-floor="3f-clinic"],
+    [data-active-floor="4f-clinic"],
+    [data-active-floor="5f-clinic"]
+  )
+  .panel-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: var(--floor-bridge-top);
+  left: 0;
+  width: 7.2%;
+  height: var(--floor-bridge-height);
+  background: var(--floor-bridge-color);
+  pointer-events: none;
 }
 
-.experience-shell[data-active-floor="4f-clinic"] {
-  --service-bridge-top: 29%;
-  --service-bridge-bottom: 42%;
+.experience-shell[data-active-floor="5f-clinic"] .panel-stage {
+  --floor-bridge-top: 15%;
+  --floor-bridge-height: 12.5%;
+  --floor-bridge-color: #d99bb2;
 }
 
-.experience-shell[data-active-floor="3f-clinic"] {
-  --service-bridge-top: 38%;
-  --service-bridge-bottom: 51%;
+.experience-shell[data-active-floor="4f-clinic"] .panel-stage {
+  --floor-bridge-top: 27%;
+  --floor-bridge-height: 12.5%;
+  --floor-bridge-color: #d99bb2;
 }
 
-.experience-shell[data-active-floor="2f-clinic"] {
-  --service-bridge-top: 47%;
-  --service-bridge-bottom: 60%;
+.experience-shell[data-active-floor="3f-clinic"] .panel-stage {
+  --floor-bridge-top: 39%;
+  --floor-bridge-height: 12.5%;
+  --floor-bridge-color: #d99bb2;
 }
 
-.experience-shell[data-active-floor="2f-aesthetic"] {
-  --service-bridge-top: 58%;
-  --service-bridge-bottom: 71%;
+.experience-shell[data-active-floor="2f-clinic"] .panel-stage {
+  --floor-bridge-top: 51%;
+  --floor-bridge-height: 12.5%;
+  --floor-bridge-color: #d99bb2;
+}
+
+.experience-shell[data-active-floor="2f-aesthetic"] .panel-stage {
+  --floor-bridge-top: 63%;
+  --floor-bridge-height: 12.5%;
+  --floor-bridge-color: #e7c6a9;
 }
 
 .service-focus-panel {
@@ -1020,44 +1056,20 @@ a {
   clip-path: polygon(
     7% 7%,
     10% 7%,
-    10% 0,
+    10% 2.8%,
+    94% 2.8%,
+    94% 0,
     100% 0,
     100% 100%,
     13% 100%,
     13% 94%,
     7% 94%,
-    7% 88%,
-    0 88%,
-    0 74%,
-    7% 74%,
-    7% var(--service-bridge-bottom),
-    0 var(--service-bridge-bottom),
-    0 var(--service-bridge-top),
-    7% var(--service-bridge-top),
     7% 7%
   );
 }
 
 .aesthetic-focus-panel {
   background: linear-gradient(108deg, #e7c6a9 0%, #b79da7 39%, #3f4f80 100%);
-}
-
-.clinic-focus-panel {
-  clip-path: polygon(
-    7% 7%,
-    10% 7%,
-    10% 2.8%,
-    94% 2.8%,
-    94% 0,
-    100% 0,
-    100% 100%,
-    7% 100%,
-    7% var(--service-bridge-bottom),
-    0 var(--service-bridge-bottom),
-    0 var(--service-bridge-top),
-    7% var(--service-bridge-top),
-    7% 7%
-  );
 }
 
 .service-focus-panel::before {
@@ -1306,6 +1318,10 @@ a {
 
   .panel-stage[data-has-active="true"] {
     margin-top: 0;
+  }
+
+  .panel-stage::before {
+    display: none;
   }
 
   .experience-shell[data-state="selected"] .building-card {
