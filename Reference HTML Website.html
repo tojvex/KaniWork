@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kani Group Floor Navigation Prototype</title>
+  <style>
+    :root {
+      --bg: #0a1250;
+      --panel: linear-gradient(180deg, #ddb7cc 0%, #6b72b7 100%);
+      --panel-salt: linear-gradient(180deg, #c9d1a8 0%, #6b72b7 100%);
+      --text: #f2e9f1;
+      --muted: rgba(255,255,255,0.45);
+      --line: rgba(255,255,255,0.18);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); }
+    .page { min-height: 100vh; display: grid; grid-template-columns: 320px 1fr; gap: 32px; padding: 32px; align-items: center; }
+    .building-wrap { position: relative; width: 280px; margin: 0 auto; }
+    .building { position: relative; width: 100%; display: flex; flex-direction: column-reverse; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .roof { height: 74px; border: 1px solid var(--line); border-bottom: none; position: relative; background: rgba(255,255,255,0.02); clip-path: polygon(10% 100%, 18% 35%, 82% 35%, 90% 100%); margin-bottom: -1px; }
+    .roof::before { content: ""; position: absolute; inset: 14px 28px; border: 1px solid rgba(255,255,255,0.14); clip-path: polygon(10% 100%, 18% 20%, 82% 20%, 90% 100%); }
+    .floor { position: relative; height: 88px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.03); cursor: pointer; transition: transform .22s ease, opacity .22s ease, background .22s ease; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; padding: 12px; }
+    .floor:hover { transform: translateX(10px); background: rgba(255,255,255,0.09); }
+    .floor.faded { opacity: 0.22; }
+    .floor.active { opacity: 1; transform: translateX(18px); background: rgba(255,255,255,0.13); box-shadow: 0 0 0 1px rgba(255,255,255,0.25) inset; }
+    .floor-label { position: absolute; left: 12px; top: 10px; font-size: 12px; color: var(--muted); letter-spacing: 0.12em; }
+    .floor-title { font-size: 18px; letter-spacing: 0.08em; }
+    .panel-area { position: relative; min-height: 72vh; display: flex; align-items: center; justify-content: center; }
+    .panel { width: min(760px, 100%); min-height: 560px; padding: 42px 42px 34px; background: var(--panel); position: relative; display: none; box-shadow: 0 20px 60px rgba(0,0,0,0.22); }
+    .panel.salt { background: var(--panel-salt); }
+    .panel.active { display: block; }
+    .close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.5); background: transparent; color: var(--text); cursor: pointer; }
+    .eyebrow { font-size: 13px; letter-spacing: 0.2em; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+    .brand { font-size: 52px; line-height: 0.96; margin: 0 0 16px; font-weight: 300; }
+    .subtitle { font-size: 20px; margin-bottom: 28px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .copy { max-width: 520px; line-height: 1.7; color: rgba(255,255,255,0.88); margin-bottom: 32px; }
+    .services { border: 1px solid rgba(255,255,255,0.28); max-width: 420px; padding: 20px 24px; margin-bottom: 34px; }
+    .services h3 { margin: 0 0 12px; font-size: 22px; letter-spacing: 0.08em; font-weight: 400; }
+    .services ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; color: rgba(255,255,255,0.86); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .btn { min-width: 124px; height: 44px; border: 1px solid rgba(255,255,255,0.45); background: rgba(255,255,255,0.08); color: var(--text); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: background .2s ease, transform .2s ease; }
+    .btn:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
+    .default-state { width: min(760px, 100%); min-height: 560px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; text-align: center; padding: 32px; color: rgba(255,255,255,0.72); }
+    @media (max-width: 920px) {
+      .page { grid-template-columns: 1fr; gap: 24px; padding: 18px; }
+      .building-wrap { width: 220px; }
+      .panel, .default-state { min-height: 520px; }
+      .brand { font-size: 38px; }
+      .subtitle { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="building-wrap">
+      <div class="roof"></div>
+      <div class="building">
+        <div class="floor" data-floor="1f-beauty"><div class="floor-label">1F</div><div class="floor-title">Beauty Studio</div></div>
+        <div class="floor" data-floor="1f-reception"><div class="floor-label">1F</div><div class="floor-title">Reception</div></div>
+        <div class="floor" data-floor="2f-aesthetic"><div class="floor-label">2F</div><div class="floor-title">Kani Aesthetic</div></div>
+        <div class="floor" data-floor="3f-clinic"><div class="floor-label">3F</div><div class="floor-title">Kani Clinic</div></div>
+        <div class="floor" data-floor="4f-clinic"><div class="floor-label">4F</div><div class="floor-title">Kani Clinic</div></div>
+        <div class="floor" data-floor="5f-clinic"><div class="floor-label">5F</div><div class="floor-title">Kani Clinic</div></div>
+        <div class="floor" data-floor="7f-salt"><div class="floor-label">7F</div><div class="floor-title">Salt</div></div>
+      </div>
+    </div>
+    <div class="panel-area">
+      <div class="default-state" id="defaultState"><div><h2 style="font-weight:300; letter-spacing:.08em;">Kani Group Building</h2><p>Hover a floor to highlight it. Click a floor to open its brand window.</p></div></div>
+
+      <section class="panel" id="1f-beauty-panel"><button class="close" data-close>×</button><div class="eyebrow">1F</div><h1 class="brand">BEAUTY STUDIO</h1><div class="subtitle">Get ready for your special day</div><div class="copy">Beauty Studio by Kani offers self-care procedures including hairstyle, makeup and manicure.</div><div class="services"><h3>Services</h3><ul><li>Haircut / Coloring</li><li>Nail Care</li><li>Makeup</li></ul></div><div class="actions"><a href="#" class="btn">Website</a><a href="#" class="btn">Instagram</a><a href="#" class="btn">Facebook</a><a href="#" class="btn">Call</a></div></section>
+
+      <section class="panel" id="1f-reception-panel"><button class="close" data-close>×</button><div class="eyebrow">1F</div><h1 class="brand">RECEPTION</h1><div class="subtitle">Plan a visit</div><div class="copy">The first floor reception acts as the primary information hub.</div><div class="services"><h3>Services</h3><ul><li>Book an Appointment</li><li>Humanoid Robot</li><li>Pharmacy</li></ul></div><div class="actions"><a href="#" class="btn">Website</a><a href="#" class="btn">Instagram</a><a href="#" class="btn">Facebook</a><a href="#" class="btn">Call</a></div></section>
+
+      <section class="panel" id="2f-aesthetic-panel"><button class="close" data-close>×</button><div class="eyebrow">2F</div><h1 class="brand">KANI AESTHETIC</h1><div class="subtitle">Be the way you want to be</div><div class="copy">Aesthetic procedures for rejuvenation and aesthetic care.</div><div class="services"><h3>Services</h3><ul><li>Facial Treatments</li><li>Modern Equipment</li><li>Laser Hair Removal</li></ul></div><div class="actions"><a href="#" class="btn">Website</a><a href="#" class="btn">TikTok</a><a href="#" class="btn">Instagram</a><a href="#" class="btn">Call</a></div></section>
+
+      <section class="panel" id="3f-clinic-panel"><button class="close" data-close>×</button><div class="eyebrow">3F</div><h1 class="brand">KANI CLINIC</h1><div class="subtitle">Care for everything skin-related</div><div class="copy">Clinic floor with services and direct links.</div><div class="services"><h3>Services</h3><ul><li>Dermatology</li><li>Podology</li><li>Trichology</li></ul></div><div class="actions"><a href="#" class="btn">Website</a><a href="#" class="btn">TikTok</a><a href="#" class="btn">Instagram</a><a href="#" class="btn">Call</a></div></section>
+
+      <section class="panel" id="4f-clinic-panel"><button class="close" data-close>×</button><div class="eyebrow">4F</div><h1 class="brand">KANI CLINIC</h1><div class="subtitle">Check everything about your health</div><div class="copy">Reusable clinic panel with floor-specific content.</div><div class="services"><h3>Services</h3><ul><li>Cardiology</li><li>Gynecology</li><li>Endocrinology and Others</li></ul></div><div class="actions"><a href="#" class="btn">Website</a><a href="#" class="btn">TikTok</a><a href="#" class="btn">Instagram</a><a href="#" class="btn">Call</a></div></section>
+
+      <section class="panel" id="5f-clinic-panel"><button class="close" data-close>×</button><div class="eyebrow">5F</div><h1 class="brand">KANI CLINIC</h1><div class="subtitle">Experience modern technology</div><div class="copy">Floor-specific panel for diagnostics and modern technologies.</div><div class="services"><h3>Services</h3><ul><li>FotoFinder BodyStudio</li><li>Consultation</li><li>Diagnostics</li></ul></div><div class="actions"><a href="#" class="btn">Website</a><a href="#" class="btn">TikTok</a><a href="#" class="btn">Instagram</a><a href="#" class="btn">Call</a></div></section>
+
+      <section class="panel salt" id="7f-salt-panel"><button class="close" data-close>×</button><div class="eyebrow">7F</div><h1 class="brand">SALT</h1><div class="subtitle">Plan your event</div><div class="copy">Rooftop restaurant and event destination.</div><div class="services"><h3>Services</h3><ul><li>Casual Dining</li><li>Cocktail and Wine Bar</li><li>Private Group Reservations</li></ul></div><div class="actions"><a href="#" class="btn">Website</a><a href="#" class="btn">Instagram</a><a href="#" class="btn">Facebook</a><a href="#" class="btn">Call</a></div></section>
+    </div>
+  </div>
+
+  <script>
+    const floors = document.querySelectorAll('.floor');
+    const panels = document.querySelectorAll('.panel');
+    const defaultState = document.getElementById('defaultState');
+
+    function openPanel(floorId) {
+      floors.forEach(f => {
+        f.classList.toggle('active', f.dataset.floor === floorId);
+        f.classList.toggle('faded', f.dataset.floor !== floorId);
+      });
+      panels.forEach(panel => panel.classList.toggle('active', panel.id === `${floorId}-panel`));
+      defaultState.style.display = 'none';
+    }
+
+    function resetView() {
+      floors.forEach(f => f.classList.remove('active', 'faded'));
+      panels.forEach(panel => panel.classList.remove('active'));
+      defaultState.style.display = 'flex';
+    }
+
+    floors.forEach(floor => floor.addEventListener('click', () => openPanel(floor.dataset.floor)));
+    document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', resetView));
+  </script>
+</body>
+</html>

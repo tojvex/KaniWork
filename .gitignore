@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+dist
+coverage
+playwright-report
+test-results
+.env*.local
+*.log
+Thumbs.db
+.DS_Store
+public/assets/figma/*.zip
