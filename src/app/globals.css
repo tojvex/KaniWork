@@ -954,10 +954,10 @@ a {
     [data-active-floor="5f-clinic"]
   )
   .building-card {
-  left: clamp(22px, 4.2%, 54px);
-  top: 4%;
+  left: clamp(12px, calc(26vw - 180px), 140px);
+  top: clamp(28px, 6.6vh, 54px);
   bottom: auto;
-  width: min(clamp(285px, 23.5vw, 330px), calc((100vh - 46px) * 0.505));
+  width: min(clamp(205px, 17vw, 260px), calc((100vh - 46px) * 0.525));
 }
 
 .experience-shell:is(
@@ -980,10 +980,10 @@ a {
   )
   .panel-stage {
   z-index: 2;
-  top: 6.4%;
-  right: 3.4%;
-  bottom: 6%;
-  left: clamp(18.6%, calc(35.8% - 0.9vw), 25.5%);
+  top: clamp(28px, 7vh, 56px);
+  right: clamp(20px, 3vw, 52px);
+  bottom: clamp(34px, 8vh, 72px);
+  left: clamp(203px, 26vw, 360px);
 }
 
 .experience-shell[data-active-floor="5f-clinic"] {
@@ -1046,7 +1046,9 @@ a {
   clip-path: polygon(
     7% 7%,
     10% 7%,
-    10% 0,
+    10% 2.8%,
+    94% 2.8%,
+    94% 0,
     100% 0,
     100% 100%,
     7% 100%,
@@ -1066,7 +1068,7 @@ a {
   position: absolute;
   z-index: 30;
   top: 0;
-  right: -18px;
+  right: -16px;
   width: 18px;
   height: 18px;
   padding: 0;
@@ -1081,9 +1083,9 @@ a {
 
 .service-focus-copy {
   position: absolute;
-  top: 7%;
-  right: 5.4%;
-  width: min(54%, 630px);
+  top: clamp(28px, 7.2%, 58px);
+  right: clamp(28px, 5.2%, 58px);
+  width: min(68%, 700px);
   color: rgba(248, 242, 251, 0.84);
   text-align: center;
 }
@@ -1092,14 +1094,14 @@ a {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: clamp(16px, 2vw, 28px);
+  gap: clamp(14px, 1.6vw, 24px);
 }
 
 .service-focus-title-group h2 {
   margin: 0;
   color: #efb7c4;
-  font-size: clamp(2.55rem, 4.2vw, 4.45rem);
-  font-weight: 300;
+  font-size: clamp(2.625rem, 3.6vw, 3.25rem);
+  font-weight: 250;
   line-height: 0.95;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -1122,15 +1124,15 @@ a {
 }
 
 .service-logo-mark {
-  min-width: clamp(72px, 6vw, 92px);
-  height: clamp(34px, 3vw, 44px);
+  min-width: clamp(66px, 5.1vw, 82px);
+  height: clamp(28px, 2.4vw, 34px);
   padding: 0 8px;
   border: 1px solid rgba(239, 183, 196, 0.75);
   display: grid;
   place-items: center;
   color: #314173;
   background: rgba(246, 183, 196, 0.9);
-  font-size: clamp(0.7rem, 0.95vw, 0.88rem);
+  font-size: clamp(0.66rem, 0.78vw, 0.78rem);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -1144,9 +1146,9 @@ a {
 
 .service-outline-block {
   position: relative;
-  margin-top: clamp(18px, 2.5vw, 30px);
-  min-height: clamp(58px, 6.5vw, 82px);
-  padding: clamp(13px, 1.6vw, 20px) clamp(22px, 3vw, 42px);
+  margin-top: clamp(16px, 2.3vw, 28px);
+  min-height: clamp(52px, 5.6vw, 70px);
+  padding: clamp(10px, 1.3vw, 16px) clamp(24px, 3.2vw, 48px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1165,15 +1167,16 @@ a {
 .service-secondary-block p {
   margin: 0;
   color: rgba(248, 242, 251, 0.74);
-  font-size: clamp(0.72rem, 0.86vw, 0.92rem);
+  font-size: clamp(0.7rem, 0.82vw, 0.88rem);
   line-height: 1.45;
   text-align: center;
 }
 
 .service-secondary-block {
   position: relative;
-  margin-top: clamp(22px, 3vw, 38px);
-  padding: 0 clamp(32px, 4vw, 54px) 0 clamp(24px, 3vw, 42px);
+  margin: clamp(20px, 3vw, 36px) auto 0;
+  max-width: 650px;
+  padding: 0 clamp(34px, 4.2vw, 58px) 0 clamp(18px, 2.4vw, 34px);
 }
 
 .service-secondary-block span {
@@ -1191,11 +1194,11 @@ a {
 }
 
 .service-focus-panel .action-links {
-  right: 7.2%;
-  bottom: 8.9%;
+  right: clamp(36px, 5.5%, 72px);
+  bottom: clamp(30px, 8.3%, 58px);
   width: auto;
   justify-content: flex-end;
-  gap: 12px;
+  gap: clamp(14px, 1.3vw, 18px);
 }
 
 .service-focus-panel .action-link {
