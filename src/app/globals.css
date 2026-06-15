@@ -954,10 +954,10 @@ a {
     [data-active-floor="5f-clinic"]
   )
   .building-card {
-  left: clamp(12px, calc(26vw - 180px), 140px);
-  top: clamp(28px, 6.6vh, 54px);
+  left: clamp(22px, 4.2%, 54px);
+  top: 4%;
   bottom: auto;
-  width: min(clamp(205px, 17vw, 260px), calc((100vh - 46px) * 0.525));
+  width: min(clamp(285px, 23.5vw, 330px), calc((100vh - 46px) * 0.505));
 }
 
 .experience-shell:is(
