@@ -527,7 +527,7 @@ a {
   left: clamp(22px, 4.2%, 54px);
   top: 4%;
   bottom: auto;
-  width: clamp(285px, 23.5vw, 330px);
+  width: min(clamp(285px, 23.5vw, 330px), calc((100vh - 46px) * 0.505));
 }
 
 .experience-shell[data-active-floor="1f-reception"] .panel-stage {
@@ -715,7 +715,7 @@ a {
   left: clamp(22px, 4.2%, 54px);
   top: 4%;
   bottom: auto;
-  width: clamp(285px, 23.5vw, 330px);
+  width: min(clamp(285px, 23.5vw, 330px), calc((100vh - 46px) * 0.505));
 }
 
 .experience-shell[data-active-floor="1f-beauty"] .roof-line {
@@ -957,7 +957,7 @@ a {
   left: clamp(22px, 4.2%, 54px);
   top: 4%;
   bottom: auto;
-  width: clamp(285px, 23.5vw, 330px);
+  width: min(clamp(285px, 23.5vw, 330px), calc((100vh - 46px) * 0.505));
 }
 
 .experience-shell:is(

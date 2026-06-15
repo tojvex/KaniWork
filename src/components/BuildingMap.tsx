@@ -10,14 +10,14 @@ type BuildingMapProps = {
 };
 
 const floorGeometry = [
-  { id: "7f-salt", y: 56, height: 117 },
-  { id: "5f-clinic", y: 173, height: 117 },
-  { id: "4f-clinic", y: 290, height: 117 },
-  { id: "3f-clinic", y: 407, height: 117 },
-  { id: "2f-clinic", y: 524, height: 117 },
-  { id: "2f-aesthetic", y: 641, height: 117 },
-  { id: "1f-reception", y: 758, height: 117 },
-  { id: "1f-beauty", y: 875, height: 117 }
+  { id: "7f-salt", y: 56, height: 103 },
+  { id: "5f-clinic", y: 159, height: 103 },
+  { id: "4f-clinic", y: 262, height: 103 },
+  { id: "3f-clinic", y: 365, height: 103 },
+  { id: "2f-clinic", y: 468, height: 103 },
+  { id: "2f-aesthetic", y: 571, height: 103 },
+  { id: "1f-reception", y: 674, height: 103 },
+  { id: "1f-beauty", y: 777, height: 103 }
 ];
 
 export function BuildingMap({
@@ -37,7 +37,7 @@ export function BuildingMap({
 
       <svg
         className="building-svg"
-        viewBox="0 0 455 1012"
+        viewBox="0 0 455 900"
         role="group"
         aria-label={locale === "ka" ? "Kani Group-ის სართულების რუკა" : "Kani Group floor map"}
       >
@@ -71,8 +71,8 @@ export function BuildingMap({
         <text className="roof-script" x="178" y="45">
           Salt
         </text>
-        <rect className="building-outline" x="14" y="56" width="361" height="936" rx="6" />
-        <path className="building-shine" d="M288 68 L374 68 L374 981 L210 981 C260 690 286 340 288 68 Z" />
+        <rect className="building-outline" x="14" y="56" width="361" height="824" rx="6" />
+        <path className="building-shine" d="M288 68 L374 68 L374 870 L210 870 C260 610 286 310 288 68 Z" />
 
         {floorGeometry.map((geometry) => {
           const floor = floors.find((item) => item.id === geometry.id);
