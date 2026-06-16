@@ -73,7 +73,7 @@ export function BrandPanel({ floor, locale, onClose }: BrandPanelProps) {
               </div>
               <Image
                 className="beauty-logo-mark"
-                src="/assets/figma/BeatyLogo.png"
+                src="/assets/figma/BeautyLogoCrop.png"
                 alt="Beauty Studio by Kani"
                 width={84}
                 height={84}
