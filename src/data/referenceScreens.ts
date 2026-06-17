@@ -18,6 +18,7 @@ export const selectedStateReferences: Record<string, string> = {
 };
 
 export const mobileStateReferences: Record<string, string> = {
+  "7f-salt": "/assets/figma/SaltPhone.png",
   "5f-clinic": "/assets/figma/ClinicPhon1.png",
   "4f-clinic": "/assets/figma/ClinicPhone2.png",
   "3f-clinic": "/assets/figma/ClinicPhone3.png",
@@ -45,6 +46,11 @@ export const homeHotspots: ReferenceHotspot[] = [
   { id: "2f-aesthetic", label: "2F Kani Aesthetic", top: "61.4%" },
   { id: "1f-reception", label: "1F Reception", top: "72.2%" },
   { id: "1f-beauty", label: "1F Beauty Studio", top: "82.9%" }
+];
+
+export const mobileHomeHotspots: ReferenceHotspot[] = [
+  { id: "7f-salt", label: "7F Salt", top: "7.4%" },
+  ...homeHotspots
 ];
 
 export const selectedHotspots: ReferenceHotspot[] = [

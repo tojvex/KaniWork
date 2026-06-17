@@ -259,6 +259,8 @@ export const floors: FloorData[] = [
       }
     },
     links: [
+      { kind: "call", label: "Call", href: placeholderLinks.call, placeholder: true },
+      { kind: "email", label: "Email", href: placeholderLinks.email, placeholder: true },
       { kind: "website", label: "Website", href: placeholderLinks.website, placeholder: true },
       { kind: "instagram", label: "Instagram", href: placeholderLinks.instagram, placeholder: true },
       { kind: "facebook", label: "Facebook", href: placeholderLinks.facebook, placeholder: true },

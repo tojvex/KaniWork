@@ -110,6 +110,16 @@ export function KaniExperience() {
       </header>
 
       <section className="figma-stage" aria-label="Kani Group building floors">
+        {activeFloor ? (
+          <button
+            className="mobile-selected-backdrop"
+            type="button"
+            aria-label="Close mobile panel"
+            data-testid="mobile-selected-backdrop"
+            onClick={() => setActiveFloorId(null)}
+          />
+        ) : null}
+
         <MobileReferenceFrame
           activeFloor={activeFloor}
           activeFloorId={activeFloorId}

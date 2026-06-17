@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { homeHotspots } from "@/data/referenceScreens";
+import { mobileHomeHotspots } from "@/data/referenceScreens";
 import type { FloorData } from "@/types/floor";
 
 type MobileReferenceFrameProps = {
@@ -26,20 +25,17 @@ export function MobileReferenceFrame({
       aria-hidden="false"
       onClick={activeFloor ? onClose : undefined}
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         className="mobile-reference-layer"
         src={imageSource}
         alt=""
-        fill
-        sizes="100vw"
-        priority
-        unoptimized
         aria-hidden="true"
       />
 
       {!activeFloor ? (
         <div className="mobile-reference-hotspots" aria-label="Floor shortcuts">
-          {homeHotspots.map((hotspot) => (
+          {mobileHomeHotspots.map((hotspot) => (
             <button
               key={hotspot.id}
               type="button"

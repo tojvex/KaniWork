@@ -168,5 +168,13 @@ test.describe("Kani Group building navigation", () => {
     await closePanel(page);
     await expect(phoneReference).toHaveAttribute("data-state", "home");
     await expect(page.locator(".mobile-reference-layer")).toHaveAttribute("src", /MainPage\.png/);
+
+    await openFloor(page, "7f-salt");
+    await expect(phoneReference).toHaveAttribute("data-state", "selected");
+    await expect(page.locator(".mobile-reference-layer")).toHaveAttribute("src", /SaltPhone\.png/);
+    await expect(page.getByTestId("mobile-link-call")).toHaveAttribute("href", /tel:/);
+    await expect(page.getByTestId("mobile-link-email")).toHaveAttribute("href", /mailto:/);
+    await closePanel(page);
+    await expect(phoneReference).toHaveAttribute("data-state", "home");
   });
 });
