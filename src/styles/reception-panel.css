@@ -1,0 +1,206 @@
+.experience-shell[data-active-floor="1f-reception"] {
+  padding: 0;
+  background: #070d3c;
+}
+
+.experience-shell[data-active-floor="1f-reception"] .topbar {
+  display: none;
+}
+
+.experience-shell[data-active-floor="1f-reception"] .figma-stage {
+  width: 100%;
+  min-height: 100vh;
+  aspect-ratio: auto;
+  border: 0;
+  background: #070d3c;
+}
+
+.experience-shell[data-active-floor="1f-reception"] .figma-stage::before {
+  display: none;
+}
+
+.experience-shell[data-active-floor="1f-reception"] .building-card {
+  left: clamp(33px, 3.35vw, 64px);
+  top: clamp(18px, 2.05vh, 42px);
+  bottom: auto;
+  width: min(clamp(285px, 23.7vw, 455px), calc((100vh - 46px) * 0.45));
+}
+
+.experience-shell[data-active-floor="1f-reception"] .panel-stage {
+  z-index: 2;
+  --floor-bridge-top: 75%;
+  --floor-bridge-height: 15%;
+  --floor-bridge-color: #e7d1c1;
+  top: clamp(30px, 2.2vw, 42px);
+  right: clamp(28px, 2.1vw, 40px);
+  bottom: clamp(54px, 4vw, 77px);
+  left: clamp(203px, 24vw, 459px);
+}
+
+.experience-shell[data-active-floor="1f-reception"] .panel-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: var(--floor-bridge-top);
+  left: 0;
+  width: 7.2%;
+  height: var(--floor-bridge-height);
+  background: var(--floor-bridge-color);
+  pointer-events: none;
+}
+
+.reception-panel {
+  display: block;
+  padding: 0;
+  min-height: 100%;
+  overflow: hidden;
+  background: linear-gradient(108deg, #e7d1c1 0%, #b7a5b4 41%, #43527f 100%);
+  clip-path: polygon(
+    7% 10.8%,
+    10% 10.8%,
+    10% 3.75%,
+    94% 3.75%,
+    94% 0,
+    100% 0,
+    100% 3.75%,
+    97.5% 3.75%,
+    97.5% 100%,
+    10% 100%,
+    10% 92.9%,
+    7% 92.9%,
+    7% 10.8%
+  );
+}
+
+.reception-panel::before {
+  border-color: rgba(248, 242, 251, 0.12);
+}
+
+.reception-close-button {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-color: rgba(248, 242, 251, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(248, 242, 251, 0.72);
+  background: rgba(7, 13, 60, 0.22);
+  backdrop-filter: none;
+}
+
+.reception-close-button:hover {
+  color: #ffffff;
+  background: rgba(7, 13, 60, 0.44);
+}
+
+.reception-copy {
+  position: absolute;
+  top: clamp(84px, 11.2%, 108px);
+  right: 2.5%;
+  width: min(68%, 942px);
+  color: rgba(248, 242, 251, 0.9);
+  text-align: center;
+}
+
+.reception-title-group h2 {
+  margin: 0;
+  color: #efc7a7;
+  font-size: clamp(2.8rem, 4.4vw, 4.6rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.reception-title-group h2 span {
+  display: inline-block;
+  margin-left: clamp(18px, 2.7vw, 40px);
+  font-weight: 700;
+}
+
+.reception-title-group p {
+  margin: 8px 0 0;
+  color: rgba(239, 199, 167, 0.82);
+  font-size: clamp(0.78rem, 1.05vw, 0.95rem);
+  line-height: 1.35;
+}
+
+.reception-outline-block {
+  position: relative;
+  margin-top: clamp(34px, 3.3vw, 50px);
+  min-height: clamp(136px, 9.35vw, 180px);
+  padding: clamp(24px, 2.3vw, 34px) clamp(42px, 4.6vw, 88px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(248, 242, 251, 0.82);
+}
+
+.reception-outline-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(248, 242, 251, 0.42);
+  clip-path: polygon(2% 0, 100% 0, 100% 100%, 0 100%, 0 9%, 2% 9%);
+  pointer-events: none;
+}
+
+.reception-outline-block p,
+.reception-secondary-block p {
+  margin: 0;
+  font-size: clamp(1rem, 1.18vw, 1.42rem);
+  line-height: 1.45;
+  text-align: center;
+}
+
+.reception-outline-block p {
+  max-width: 88%;
+}
+
+.reception-secondary-block {
+  position: relative;
+  margin-top: clamp(34px, 3.6vw, 62px);
+  padding: 0 clamp(52px, 5.4vw, 92px) 0 clamp(26px, 3vw, 52px);
+  color: rgba(248, 242, 251, 0.82);
+}
+
+.reception-secondary-block span {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 7px;
+  height: calc(100% - 8px);
+  min-height: 96px;
+  background: #efc7a7;
+}
+
+.reception-panel .action-links {
+  right: clamp(80px, 8.9%, 128px);
+  bottom: clamp(54px, 8.7%, 86px);
+  width: auto;
+  justify-content: flex-end;
+  gap: 32px;
+}
+
+.reception-panel .action-link {
+  min-width: 48px;
+  min-height: 48px;
+  color: #43527f;
+  background: #efc7a7;
+}
+
+.reception-panel .action-link svg {
+  width: 28px;
+  height: 28px;
+}
+
+.reception-panel .action-link:hover {
+  color: #070d3c;
+  background: #ffffff;
+}

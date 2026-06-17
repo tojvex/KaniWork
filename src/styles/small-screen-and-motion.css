@@ -1,0 +1,29 @@
+@media (max-width: 560px) {
+  .locale-button {
+    min-width: 42px;
+  }
+
+  .floor-button {
+    grid-template-columns: 32px minmax(0, 1fr);
+  }
+
+  .floor-button strong {
+    font-size: 0.8rem;
+  }
+
+  .action-link {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

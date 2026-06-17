@@ -1,0 +1,34 @@
+.stage-line {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid var(--line);
+}
+
+.stage-line-top {
+  top: 12%;
+  left: 20%;
+  right: 18%;
+  height: 15%;
+}
+
+.stage-line-main {
+  top: 27%;
+  left: 30%;
+  right: 6%;
+  height: 48%;
+}
+
+.stage-line-bottom {
+  left: 36%;
+  right: 18%;
+  bottom: 8%;
+  height: 18%;
+}
+
+.experience-shell[data-state="selected"] .stage-line {
+  display: none;
+}
+
+.experience-shell[data-state="selected"] .building-heading {
+  display: none;
+}

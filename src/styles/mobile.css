@@ -1,0 +1,540 @@
+@media (max-width: 700px) {
+  .experience-shell {
+    display: block;
+    padding: 0;
+  }
+
+  .topbar {
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    justify-content: space-between;
+  }
+
+  .figma-logo {
+    min-width: 132px;
+    min-height: 42px;
+    font-size: 1.05rem;
+  }
+
+  .figma-stage {
+    width: 100%;
+    min-height: 100vh;
+    padding: 92px 18px 28px;
+    overflow: visible;
+  }
+
+  .stage-line-top {
+    top: 18%;
+    left: 18px;
+    right: 18px;
+    height: 12%;
+  }
+
+  .stage-line-main {
+    top: 30%;
+    left: 18px;
+    right: 18px;
+    height: 42%;
+  }
+
+  .stage-line-bottom {
+    left: 18px;
+    right: 18px;
+    bottom: 9%;
+    height: 18%;
+  }
+
+  .building-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(310px, 100%);
+    margin: 0 auto;
+  }
+
+  .building-heading {
+    text-align: left;
+  }
+
+  .panel-stage {
+    position: relative;
+    inset: auto;
+    margin-top: 20px;
+    min-height: 420px;
+  }
+
+  .panel-stage[data-has-active="true"] {
+    margin-top: 0;
+  }
+
+  .panel-stage::before {
+    display: none;
+  }
+
+  .experience-shell[data-state="selected"] .building-card {
+    width: min(190px, 48vw);
+    margin-left: 0;
+    opacity: 0.72;
+  }
+
+  .experience-shell[data-state="selected"] .panel-stage {
+    inset: auto;
+    position: relative;
+    z-index: 3;
+  }
+
+  .brand-panel {
+    min-height: calc(100vh - 190px);
+    grid-template-rows: auto auto 1fr;
+    gap: 18px;
+    padding: 32px 22px 28px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .close-button {
+    top: 72px;
+    right: 18px;
+  }
+
+  .panel-copy {
+    justify-self: stretch;
+    text-align: left;
+  }
+
+  .panel-copy h2 {
+    font-size: clamp(2.6rem, 15vw, 5rem);
+  }
+
+  .services-box {
+    width: 100%;
+    justify-self: stretch;
+    text-align: left;
+  }
+
+  .action-links {
+    position: static;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .experience-shell[data-active-floor="1f-reception"] {
+    padding: 0;
+  }
+
+  .experience-shell[data-active-floor="1f-reception"] .figma-stage {
+    min-height: 100vh;
+    aspect-ratio: auto;
+    padding: 18px;
+    border-left-width: 3px;
+  }
+
+  .experience-shell[data-active-floor="1f-reception"] .building-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(190px, 48vw);
+    margin: 0;
+    opacity: 0.78;
+  }
+
+  .experience-shell[data-active-floor="1f-reception"] .panel-stage {
+    position: relative;
+    inset: auto;
+    min-height: calc(100vh - 210px);
+    margin-top: -18px;
+  }
+
+  .reception-panel {
+    min-height: calc(100vh - 210px);
+    clip-path: polygon(0 7%, 9% 7%, 9% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .reception-close-button {
+    top: 58px;
+    right: 24px;
+  }
+
+  .reception-copy {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    padding: 54px 22px 92px;
+  }
+
+  .reception-title-group h2 {
+    font-size: clamp(2.25rem, 10.5vw, 3.15rem);
+    letter-spacing: 0.02em;
+  }
+
+  .reception-title-group h2 span {
+    margin-left: 12px;
+  }
+
+  .reception-outline-block {
+    padding: 18px 16px;
+  }
+
+  .reception-secondary-block {
+    padding: 0 26px 0 12px;
+  }
+
+  .reception-panel .action-links {
+    position: absolute;
+    right: 22px;
+    bottom: 24px;
+    width: auto;
+  }
+
+  .experience-shell[data-active-floor="1f-beauty"] {
+    padding: 0;
+  }
+
+  .experience-shell[data-active-floor="1f-beauty"] .figma-stage {
+    min-height: 100vh;
+    aspect-ratio: auto;
+    padding: 18px;
+  }
+
+  .experience-shell[data-active-floor="1f-beauty"] .building-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(190px, 48vw);
+    margin: 0;
+    opacity: 0.78;
+  }
+
+  .experience-shell[data-active-floor="1f-beauty"] .panel-stage {
+    position: relative;
+    inset: auto;
+    min-height: calc(100vh - 210px);
+    margin-top: -18px;
+  }
+
+  .beauty-panel {
+    min-height: calc(100vh - 210px);
+    clip-path: polygon(0 7%, 9% 7%, 9% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .beauty-close-button {
+    top: 58px;
+    right: 24px;
+  }
+
+  .beauty-copy {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    padding: 54px 22px 104px;
+  }
+
+  .beauty-title-row {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .beauty-title-group h2 {
+    font-size: clamp(2rem, 8vw, 2.65rem);
+  }
+
+  .beauty-title-group p {
+    font-size: 0.92rem;
+  }
+
+  .beauty-outline-block {
+    padding: 18px 16px;
+  }
+
+  .beauty-secondary-block {
+    padding: 0 26px 0 12px;
+  }
+
+  .beauty-panel .action-links {
+    position: absolute;
+    right: 22px;
+    bottom: 24px;
+    width: auto;
+  }
+
+  .beauty-panel .action-link[data-kind="website"] {
+    margin-left: 0;
+  }
+
+  .experience-shell:is(
+      [data-active-floor="2f-aesthetic"],
+      [data-active-floor="2f-clinic"],
+      [data-active-floor="3f-clinic"],
+      [data-active-floor="4f-clinic"],
+      [data-active-floor="5f-clinic"]
+    ) {
+    padding: 0;
+  }
+
+  .experience-shell:is(
+      [data-active-floor="2f-aesthetic"],
+      [data-active-floor="2f-clinic"],
+      [data-active-floor="3f-clinic"],
+      [data-active-floor="4f-clinic"],
+      [data-active-floor="5f-clinic"]
+    )
+    .figma-stage {
+    min-height: 100vh;
+    aspect-ratio: auto;
+    padding: 18px;
+  }
+
+  .experience-shell:is(
+      [data-active-floor="2f-aesthetic"],
+      [data-active-floor="2f-clinic"],
+      [data-active-floor="3f-clinic"],
+      [data-active-floor="4f-clinic"],
+      [data-active-floor="5f-clinic"]
+    )
+    .building-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(190px, 48vw);
+    margin: 0;
+    opacity: 0.78;
+  }
+
+  .experience-shell:is(
+      [data-active-floor="2f-aesthetic"],
+      [data-active-floor="2f-clinic"],
+      [data-active-floor="3f-clinic"],
+      [data-active-floor="4f-clinic"],
+      [data-active-floor="5f-clinic"]
+    )
+    .panel-stage {
+    position: relative;
+    inset: auto;
+    min-height: calc(100vh - 210px);
+    margin-top: -18px;
+  }
+
+  .service-focus-panel {
+    min-height: calc(100vh - 210px);
+    clip-path: polygon(0 7%, 9% 7%, 9% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .service-focus-close-button {
+    top: 58px;
+    right: 24px;
+  }
+
+  .service-focus-copy {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    padding: 54px 22px 104px;
+  }
+
+  .service-focus-title-row {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .service-focus-title-group h2 {
+    font-size: clamp(1.9rem, 8vw, 2.65rem);
+  }
+
+  .service-focus-title-group p {
+    font-size: 0.9rem;
+  }
+
+  .service-logo-mark {
+    min-width: 68px;
+    height: 34px;
+  }
+
+  .service-outline-block {
+    padding: 18px 16px;
+  }
+
+  .service-secondary-block {
+    padding: 0 26px 0 12px;
+  }
+
+  .service-focus-panel .action-links {
+    position: absolute;
+    right: 22px;
+    bottom: 24px;
+    width: auto;
+  }
+
+  .service-focus-panel .action-link[data-kind="tiktok"] {
+    margin-left: 0;
+  }
+
+  .experience-shell[data-reference-state="true"] {
+    min-height: 100vh;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #070d3c;
+  }
+
+  .experience-shell[data-reference-state="true"] .topbar {
+    display: none;
+  }
+
+  .experience-shell[data-reference-state="true"] .figma-stage,
+  .experience-shell[data-active-floor="1f-reception"][data-reference-state="true"] .figma-stage,
+  .experience-shell[data-active-floor="1f-beauty"][data-reference-state="true"] .figma-stage,
+  .experience-shell:is(
+      [data-active-floor="2f-aesthetic"],
+      [data-active-floor="2f-clinic"],
+      [data-active-floor="3f-clinic"],
+      [data-active-floor="4f-clinic"],
+      [data-active-floor="5f-clinic"]
+    )[data-reference-state="true"]
+    .figma-stage {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    display: grid;
+    place-items: start center;
+    overflow: hidden;
+    border: 0;
+    background: #070d3c;
+  }
+
+  .experience-shell[data-reference-state="true"] .mobile-reference-frame {
+    position: relative;
+    z-index: 80;
+    display: block;
+    width: min(360px, 100vw, calc(100svh * 0.642857));
+    aspect-ratio: 360 / 560;
+    overflow: hidden;
+  }
+
+  .experience-shell[data-reference-state="true"] .mobile-reference-frame[data-state="home"] {
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: auto;
+  }
+
+  .experience-shell[data-reference-state="true"] .mobile-reference-layer {
+    display: block;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .experience-shell[data-reference-state="true"] .mobile-reference-frame[data-state="home"] .mobile-reference-layer {
+    object-fit: fill;
+  }
+
+  .experience-shell[data-reference-state="true"] .selected-reference-layer,
+  .experience-shell[data-reference-state="true"] .stage-line {
+    display: none;
+  }
+
+  .experience-shell[data-reference-state="true"] .building-card,
+  .experience-shell[data-reference-state="true"] .panel-stage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .experience-shell[data-reference-state="true"] .mobile-reference-hotspots {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+
+  .mobile-reference-hotspots button {
+    position: absolute;
+    left: 14.5%;
+    width: 71%;
+    height: 10.2%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .mobile-reference-frame[data-state="home"] .mobile-reference-hotspots button {
+    left: 17.1%;
+    width: 18.7%;
+    height: 9.6%;
+  }
+
+  .mobile-reference-hotspots button:focus-visible,
+  .mobile-close-hotspot:focus-visible,
+  .mobile-reference-links a:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  .mobile-reference-links {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .mobile-reference-links a {
+    position: absolute;
+    top: 75.3%;
+    width: 6.8%;
+    height: 4.8%;
+    pointer-events: auto;
+  }
+
+  .mobile-reference-links a[data-kind="call"] {
+    left: 31.2%;
+  }
+
+  .mobile-reference-links a[data-kind="email"] {
+    left: 38.6%;
+  }
+
+  .mobile-reference-links a[data-kind="tiktok"] {
+    left: 52.2%;
+  }
+
+  .mobile-reference-links a[data-kind="website"] {
+    left: 59.2%;
+  }
+
+  .mobile-reference-links a[data-kind="facebook"] {
+    left: 66.4%;
+  }
+
+  .mobile-reference-links a[data-kind="instagram"] {
+    left: 73.5%;
+  }
+
+  .experience-shell[data-active-floor="1f-reception"] .mobile-reference-links a[data-kind="call"] {
+    left: 58%;
+  }
+
+  .experience-shell[data-active-floor="1f-reception"] .mobile-reference-links a[data-kind="email"] {
+    left: 65.4%;
+  }
+
+  .mobile-close-hotspot {
+    position: absolute;
+    z-index: 3;
+    top: 14.8%;
+    right: 10.4%;
+    width: 5.8%;
+    height: 4.2%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+}

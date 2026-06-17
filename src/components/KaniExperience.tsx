@@ -5,58 +5,19 @@ import Image from "next/image";
 import { BuildingMap } from "@/components/BuildingMap";
 import { BrandPanel } from "@/components/BrandPanel";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { MobileReferenceFrame } from "@/components/MobileReferenceFrame";
 import { floors } from "@/data/floors";
+import {
+  homeHotspots,
+  homeReference,
+  mobileHomeReference,
+  mobileStateReferences,
+  referenceImageSources,
+  selectedHotspots,
+  selectedStateReferences
+} from "@/data/referenceScreens";
 import type { Locale } from "@/types/floor";
 
-const selectedStateReferences: Record<string, string> = {
-  "5f-clinic": "/assets/figma/Page2.png",
-  "4f-clinic": "/assets/figma/Page3.png",
-  "3f-clinic": "/assets/figma/Page4.png",
-  "2f-clinic": "/assets/figma/Page5.png",
-  "2f-aesthetic": "/assets/figma/Page6.png",
-  "1f-reception": "/assets/figma/Page7.png",
-  "1f-beauty": "/assets/figma/Page8.png"
-};
-
-const mobileStateReferences: Record<string, string> = {
-  "5f-clinic": "/assets/figma/ClinicPhon1.png",
-  "4f-clinic": "/assets/figma/ClinicPhone2.png",
-  "3f-clinic": "/assets/figma/ClinicPhone3.png",
-  "2f-clinic": "/assets/figma/ClinicPhone4.png",
-  "2f-aesthetic": "/assets/figma/AesthetiicPhone.png",
-  "1f-reception": "/assets/figma/ReceptionPhone.png",
-  "1f-beauty": "/assets/figma/BeautyPhone.png"
-};
-
-const mobileHomeReference = "/assets/figma/MainPage.png";
-
-const referenceImageSources = Array.from(new Set([
-  "/assets/figma/Opeening.png",
-  "/assets/figma/MainPage.png",
-  ...Object.values(selectedStateReferences),
-  mobileHomeReference,
-  ...Object.values(mobileStateReferences)
-]));
-
-const homeReference = "/assets/figma/MainPage.png";
-const homeHotspots = [
-  { id: "5f-clinic", label: "5F Kani Clinic", top: "18.3%" },
-  { id: "4f-clinic", label: "4F Kani Clinic", top: "29.1%" },
-  { id: "3f-clinic", label: "3F Kani Clinic", top: "39.9%" },
-  { id: "2f-clinic", label: "2F Kani Clinic", top: "50.7%" },
-  { id: "2f-aesthetic", label: "2F Kani Aesthetic", top: "61.4%" },
-  { id: "1f-reception", label: "1F Reception", top: "72.2%" },
-  { id: "1f-beauty", label: "1F Beauty Studio", top: "82.9%" }
-];
-const selectedHotspots = [
-  { id: "5f-clinic", label: "5F Kani Clinic", top: "16.1%" },
-  { id: "4f-clinic", label: "4F Kani Clinic", top: "26.9%" },
-  { id: "3f-clinic", label: "3F Kani Clinic", top: "37.8%" },
-  { id: "2f-clinic", label: "2F Kani Clinic", top: "48.6%" },
-  { id: "2f-aesthetic", label: "2F Kani Aesthetic", top: "59.4%" },
-  { id: "1f-reception", label: "1F Reception", top: "70.2%" },
-  { id: "1f-beauty", label: "1F Beauty Studio", top: "81.1%" }
-];
 export function KaniExperience() {
   const [activeFloorId, setActiveFloorId] = useState<string | null>(null);
   const [hoveredFloorId, setHoveredFloorId] = useState<string | null>(null);
@@ -72,7 +33,6 @@ export function KaniExperience() {
   const activeMobileReference = activeFloorId ? mobileStateReferences[activeFloorId] : null;
   const visibleReference = activeReference ?? homeReference;
   const visibleMobileReference = activeMobileReference ?? mobileHomeReference;
-  const visibleMobileHotspots = activeFloor ? [] : homeHotspots;
 
   function getTodayKey() {
     const date = new Date();
@@ -150,65 +110,13 @@ export function KaniExperience() {
       </header>
 
       <section className="figma-stage" aria-label="Kani Group building floors">
-        <div className="mobile-reference-frame" data-state={activeFloor ? "selected" : "home"} aria-hidden="false">
-          <Image
-            className="mobile-reference-layer"
-            src={visibleMobileReference}
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            unoptimized
-            aria-hidden="true"
-          />
-          {!activeFloor ? (
-            <div className="mobile-reference-hotspots" aria-label="Floor shortcuts">
-              {visibleMobileHotspots.map((hotspot) => (
-                <button
-                  key={hotspot.id}
-                  type="button"
-                  aria-label={hotspot.label}
-                  aria-pressed={activeFloorId === hotspot.id}
-                  data-testid={`mobile-hotspot-${hotspot.id}`}
-                  style={{ top: hotspot.top }}
-                  onClick={() => setActiveFloorId(hotspot.id)}
-                />
-              ))}
-            </div>
-          ) : null}
-          {activeFloor ? (
-            <>
-              <div
-                className="mobile-reference-links"
-                data-link-count={activeFloor.links.length}
-                aria-label={`${activeFloor.brandName} mobile links`}
-              >
-                {activeFloor.links.map((link) => {
-                  const isExternal = link.href.startsWith("http");
-
-                  return (
-                    <a
-                      key={`${link.kind}-${link.label}`}
-                      href={link.href}
-                      aria-label={`${link.label}${link.placeholder ? " placeholder" : ""}`}
-                      data-kind={link.kind}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noreferrer" : undefined}
-                      data-testid={`mobile-link-${link.kind}`}
-                    />
-                  );
-                })}
-              </div>
-              <button
-                className="mobile-close-hotspot"
-                type="button"
-                aria-label="Close mobile panel"
-                data-testid="mobile-close-hotspot"
-                onClick={() => setActiveFloorId(null)}
-              />
-            </>
-          ) : null}
-        </div>
+        <MobileReferenceFrame
+          activeFloor={activeFloor}
+          activeFloorId={activeFloorId}
+          imageSource={visibleMobileReference}
+          onActivate={setActiveFloorId}
+          onClose={() => setActiveFloorId(null)}
+        />
 
         <Image
           className="selected-reference-layer"
