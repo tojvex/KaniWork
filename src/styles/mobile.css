@@ -481,8 +481,18 @@
   .mobile-reference-links {
     position: absolute;
     inset: 0;
-    z-index: 3;
+    z-index: 4;
     pointer-events: none;
+  }
+
+  .mobile-card-guard {
+    position: absolute;
+    z-index: 3;
+    top: 17.8%;
+    left: 14.5%;
+    width: 71%;
+    height: 62.8%;
+    pointer-events: auto;
   }
 
   .mobile-reference-links a {
@@ -527,7 +537,7 @@
 
   .mobile-close-hotspot {
     position: absolute;
-    z-index: 3;
+    z-index: 5;
     top: 14.8%;
     right: 10.4%;
     width: 5.8%;

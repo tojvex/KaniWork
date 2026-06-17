@@ -20,7 +20,12 @@ export function MobileReferenceFrame({
   onClose
 }: MobileReferenceFrameProps) {
   return (
-    <div className="mobile-reference-frame" data-state={activeFloor ? "selected" : "home"} aria-hidden="false">
+    <div
+      className="mobile-reference-frame"
+      data-state={activeFloor ? "selected" : "home"}
+      aria-hidden="false"
+      onClick={activeFloor ? onClose : undefined}
+    >
       <Image
         className="mobile-reference-layer"
         src={imageSource}
@@ -51,6 +56,12 @@ export function MobileReferenceFrame({
       {activeFloor ? (
         <>
           <div
+            className="mobile-card-guard"
+            aria-hidden="true"
+            data-testid="mobile-card-guard"
+            onClick={(event) => event.stopPropagation()}
+          />
+          <div
             className="mobile-reference-links"
             data-link-count={activeFloor.links.length}
             aria-label={`${activeFloor.brandName} mobile links`}
@@ -67,6 +78,7 @@ export function MobileReferenceFrame({
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noreferrer" : undefined}
                   data-testid={`mobile-link-${link.kind}`}
+                  onClick={(event) => event.stopPropagation()}
                 />
               );
             })}
@@ -76,7 +88,10 @@ export function MobileReferenceFrame({
             type="button"
             aria-label="Close mobile panel"
             data-testid="mobile-close-hotspot"
-            onClick={onClose}
+            onClick={(event) => {
+              event.stopPropagation();
+              onClose();
+            }}
           />
         </>
       ) : null}

@@ -153,6 +153,18 @@ test.describe("Kani Group building navigation", () => {
     const box = await phoneReference.boundingBox();
     expect(box?.width).toBeGreaterThan(300);
 
+    await page.getByTestId("mobile-card-guard").click();
+    await expect(phoneReference).toHaveAttribute("data-state", "selected");
+
+    if (!box) {
+      throw new Error("Expected mobile reference frame bounds");
+    }
+    await page.mouse.click(box.x + 12, box.y + 12);
+    await expect(phoneReference).toHaveAttribute("data-state", "home");
+    await expect(page.locator(".mobile-reference-layer")).toHaveAttribute("src", /MainPage\.png/);
+
+    await openFloor(page, "1f-beauty");
+    await expect(phoneReference).toHaveAttribute("data-state", "selected");
     await closePanel(page);
     await expect(phoneReference).toHaveAttribute("data-state", "home");
     await expect(page.locator(".mobile-reference-layer")).toHaveAttribute("src", /MainPage\.png/);
