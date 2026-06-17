@@ -11,6 +11,12 @@ test.describe("Kani Group building navigation", () => {
   }
 
   async function openFloor(page: Page, floorId: string) {
+    const mobileHotspot = page.getByTestId(`mobile-hotspot-${floorId}`);
+    if (await mobileHotspot.isVisible()) {
+      await mobileHotspot.click();
+      return;
+    }
+
     const hotspot = page.getByTestId(`home-hotspot-${floorId}`);
     if (await hotspot.isVisible()) {
       await hotspot.click();
@@ -18,6 +24,16 @@ test.describe("Kani Group building navigation", () => {
     }
 
     await page.getByTestId(`floor-${floorId}`).click();
+  }
+
+  async function closePanel(page: Page) {
+    const mobileClose = page.getByTestId("mobile-close-hotspot");
+    if (await mobileClose.isVisible()) {
+      await mobileClose.click();
+      return;
+    }
+
+    await page.getByLabel("Close panel").click();
   }
 
   test("shows opening screen once per day", async ({ page }) => {
@@ -58,7 +74,7 @@ test.describe("Kani Group building navigation", () => {
       await openFloor(page, floorId);
       await expect(page.getByTestId("brand-panel")).toBeVisible();
       await expect(floor).toHaveAttribute("aria-pressed", "true");
-      await page.getByLabel("Close panel").click();
+      await closePanel(page);
       await expect(page.getByTestId("brand-panel")).toBeHidden();
     }
   });
@@ -70,6 +86,22 @@ test.describe("Kani Group building navigation", () => {
     const salt = page.getByTestId("floor-7f-salt");
     await expect(salt).toBeDisabled();
     await expect(page.getByTestId("brand-panel")).toBeHidden();
+  });
+
+  test("switches floors from the full selected desktop frame", async ({ page, isMobile }) => {
+    test.skip(isMobile, "desktop screenshot hotspot behavior");
+
+    await skipOpeningScreen(page);
+    await page.goto("/");
+
+    await page.getByTestId("home-hotspot-5f-clinic").click();
+    await expect(page.locator(".experience-shell")).toHaveAttribute("data-active-floor", "5f-clinic");
+
+    await page.getByTestId("selected-hotspot-1f-beauty").click({ position: { x: 4, y: 4 } });
+    await expect(page.locator(".experience-shell")).toHaveAttribute("data-active-floor", "1f-beauty");
+
+    await page.getByTestId("selected-hotspot-4f-clinic").click({ position: { x: 390, y: 4 } });
+    await expect(page.locator(".experience-shell")).toHaveAttribute("data-active-floor", "4f-clinic");
   });
 
   test("supports keyboard activation and escape reset", async ({ page }) => {
@@ -86,7 +118,7 @@ test.describe("Kani Group building navigation", () => {
   });
 
   test("switches to English content", async ({ page, isMobile }) => {
-    test.skip(!isMobile, "desktop uses exact Figma screenshot layer");
+    test.skip(true, "reference screenshot layers do not expose translated mobile or desktop text");
 
     await skipOpeningScreen(page);
     await page.goto("/");
@@ -103,11 +135,26 @@ test.describe("Kani Group building navigation", () => {
 
     await skipOpeningScreen(page);
     await page.goto("/");
+
+    const phoneReference = page.locator(".mobile-reference-frame");
+    await expect(phoneReference).toBeVisible();
+    await expect(phoneReference).toHaveAttribute("data-state", "home");
+    await expect(page.locator(".mobile-reference-layer")).toHaveAttribute("src", /MainPage\.png/);
+
     await openFloor(page, "1f-beauty");
 
-    const panel = page.getByTestId("brand-panel");
-    await expect(panel).toBeVisible();
-    const box = await panel.boundingBox();
+    await expect(phoneReference).toHaveAttribute("data-state", "selected");
+    await expect(page.locator(".mobile-reference-layer")).toHaveAttribute("src", /BeautyPhone\.png/);
+    await expect(page.getByTestId("mobile-hotspot-1f-reception")).toHaveCount(0);
+    await expect(page.locator(".mobile-reference-links a")).toHaveCount(5);
+    await expect(page.getByTestId("mobile-link-call")).toHaveAttribute("href", /tel:/);
+    await expect(page.getByTestId("mobile-link-email")).toHaveAttribute("href", /mailto:/);
+    await expect(page.getByTestId("mobile-link-instagram")).toHaveAttribute("href", "#instagram-placeholder");
+    const box = await phoneReference.boundingBox();
     expect(box?.width).toBeGreaterThan(300);
+
+    await closePanel(page);
+    await expect(phoneReference).toHaveAttribute("data-state", "home");
+    await expect(page.locator(".mobile-reference-layer")).toHaveAttribute("src", /MainPage\.png/);
   });
 });

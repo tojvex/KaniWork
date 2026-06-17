@@ -18,6 +18,26 @@ const selectedStateReferences: Record<string, string> = {
   "1f-beauty": "/assets/figma/Page8.png"
 };
 
+const mobileStateReferences: Record<string, string> = {
+  "5f-clinic": "/assets/figma/ClinicPhon1.png",
+  "4f-clinic": "/assets/figma/ClinicPhone2.png",
+  "3f-clinic": "/assets/figma/ClinicPhone3.png",
+  "2f-clinic": "/assets/figma/ClinicPhone4.png",
+  "2f-aesthetic": "/assets/figma/AesthetiicPhone.png",
+  "1f-reception": "/assets/figma/ReceptionPhone.png",
+  "1f-beauty": "/assets/figma/BeautyPhone.png"
+};
+
+const mobileHomeReference = "/assets/figma/MainPage.png";
+
+const referenceImageSources = Array.from(new Set([
+  "/assets/figma/Opeening.png",
+  "/assets/figma/MainPage.png",
+  ...Object.values(selectedStateReferences),
+  mobileHomeReference,
+  ...Object.values(mobileStateReferences)
+]));
+
 const homeReference = "/assets/figma/MainPage.png";
 const homeHotspots = [
   { id: "5f-clinic", label: "5F Kani Clinic", top: "18.3%" },
@@ -28,7 +48,15 @@ const homeHotspots = [
   { id: "1f-reception", label: "1F Reception", top: "72.2%" },
   { id: "1f-beauty", label: "1F Beauty Studio", top: "82.9%" }
 ];
-
+const selectedHotspots = [
+  { id: "5f-clinic", label: "5F Kani Clinic", top: "16.1%" },
+  { id: "4f-clinic", label: "4F Kani Clinic", top: "26.9%" },
+  { id: "3f-clinic", label: "3F Kani Clinic", top: "37.8%" },
+  { id: "2f-clinic", label: "2F Kani Clinic", top: "48.6%" },
+  { id: "2f-aesthetic", label: "2F Kani Aesthetic", top: "59.4%" },
+  { id: "1f-reception", label: "1F Reception", top: "70.2%" },
+  { id: "1f-beauty", label: "1F Beauty Studio", top: "81.1%" }
+];
 export function KaniExperience() {
   const [activeFloorId, setActiveFloorId] = useState<string | null>(null);
   const [hoveredFloorId, setHoveredFloorId] = useState<string | null>(null);
@@ -41,7 +69,10 @@ export function KaniExperience() {
     [activeFloorId]
   );
   const activeReference = activeFloorId ? selectedStateReferences[activeFloorId] : null;
+  const activeMobileReference = activeFloorId ? mobileStateReferences[activeFloorId] : null;
   const visibleReference = activeReference ?? homeReference;
+  const visibleMobileReference = activeMobileReference ?? mobileHomeReference;
+  const visibleMobileHotspots = activeFloor ? [] : homeHotspots;
 
   function getTodayKey() {
     const date = new Date();
@@ -68,6 +99,28 @@ export function KaniExperience() {
     });
 
     return () => window.cancelAnimationFrame(frameId);
+  }, []);
+
+  useEffect(() => {
+    const preloadLinks = referenceImageSources.map((source) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = source;
+      document.head.appendChild(link);
+      return link;
+    });
+    const preloadedImages = referenceImageSources.map((source) => {
+      const image = new window.Image();
+      image.decoding = "async";
+      image.src = source;
+      return image;
+    });
+
+    return () => {
+      preloadLinks.forEach((link) => link.remove());
+      preloadedImages.length = 0;
+    };
   }, []);
 
   function handleOpeningClick() {
@@ -97,6 +150,66 @@ export function KaniExperience() {
       </header>
 
       <section className="figma-stage" aria-label="Kani Group building floors">
+        <div className="mobile-reference-frame" data-state={activeFloor ? "selected" : "home"} aria-hidden="false">
+          <Image
+            className="mobile-reference-layer"
+            src={visibleMobileReference}
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            unoptimized
+            aria-hidden="true"
+          />
+          {!activeFloor ? (
+            <div className="mobile-reference-hotspots" aria-label="Floor shortcuts">
+              {visibleMobileHotspots.map((hotspot) => (
+                <button
+                  key={hotspot.id}
+                  type="button"
+                  aria-label={hotspot.label}
+                  aria-pressed={activeFloorId === hotspot.id}
+                  data-testid={`mobile-hotspot-${hotspot.id}`}
+                  style={{ top: hotspot.top }}
+                  onClick={() => setActiveFloorId(hotspot.id)}
+                />
+              ))}
+            </div>
+          ) : null}
+          {activeFloor ? (
+            <>
+              <div
+                className="mobile-reference-links"
+                data-link-count={activeFloor.links.length}
+                aria-label={`${activeFloor.brandName} mobile links`}
+              >
+                {activeFloor.links.map((link) => {
+                  const isExternal = link.href.startsWith("http");
+
+                  return (
+                    <a
+                      key={`${link.kind}-${link.label}`}
+                      href={link.href}
+                      aria-label={`${link.label}${link.placeholder ? " placeholder" : ""}`}
+                      data-kind={link.kind}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                      data-testid={`mobile-link-${link.kind}`}
+                    />
+                  );
+                })}
+              </div>
+              <button
+                className="mobile-close-hotspot"
+                type="button"
+                aria-label="Close mobile panel"
+                data-testid="mobile-close-hotspot"
+                onClick={() => setActiveFloorId(null)}
+              />
+            </>
+          ) : null}
+        </div>
+
         <Image
           className="selected-reference-layer"
           src={visibleReference}
@@ -116,6 +229,22 @@ export function KaniExperience() {
                 type="button"
                 aria-label={hotspot.label}
                 data-testid={`home-hotspot-${hotspot.id}`}
+                style={{ top: hotspot.top }}
+                onClick={() => setActiveFloorId(hotspot.id)}
+              />
+            ))}
+          </div>
+        ) : null}
+
+        {activeFloor ? (
+          <div className="selected-reference-hotspots" aria-label="Floor shortcuts">
+            {selectedHotspots.map((hotspot) => (
+              <button
+                key={hotspot.id}
+                type="button"
+                aria-label={hotspot.label}
+                aria-pressed={activeFloorId === hotspot.id}
+                data-testid={`selected-hotspot-${hotspot.id}`}
                 style={{ top: hotspot.top }}
                 onClick={() => setActiveFloorId(hotspot.id)}
               />
@@ -161,16 +290,8 @@ export function KaniExperience() {
           aria-label="Open Kani Group website"
           onClick={handleOpeningClick}
         >
-          <Image
-            className="opening-screen-image"
-            src="/assets/figma/Opeening.png"
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            unoptimized
-            aria-hidden="true"
-          />
+          <span className="opening-screen-panel opening-screen-panel-top" aria-hidden="true" />
+          <span className="opening-screen-panel opening-screen-panel-bottom" aria-hidden="true" />
         </button>
       ) : null}
     </main>
